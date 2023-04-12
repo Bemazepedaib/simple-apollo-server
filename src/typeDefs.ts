@@ -3,7 +3,7 @@
 
 const typeDefs = `
     type Movie {
-        id: String
+        id: ID
         title: String
         director: String
         duration: String
@@ -12,6 +12,12 @@ const typeDefs = `
 
     type Query {
         movies: [Movie]
+        movie(id: ID!): Movie
+    }
+
+    type Mutation {
+        addMovie(title: String!, director: String!, duration: String!, poster: String!): Movie
+        deleteMovie(id: ID!): String
     }
 `
 

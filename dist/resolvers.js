@@ -40,7 +40,29 @@ const movies = [
 // Resolvers define how to fetch the types defined in the schema
 const resolvers = {
     Query: {
-        movies: () => movies
+        movies() {
+            return movies;
+        },
+        movie(_, { id }, __, ___) {
+            return movies.find((movie) => movie.id === id);
+        }
+    },
+    Mutation: {
+        addMovie(_, { title, director, duration, poster }, __, ___) {
+            const newMovie = {
+                id: (parseInt(movies.at(movies.length - 1).id) + 1).toString(),
+                title: title,
+                director: director,
+                duration: duration,
+                poster: poster
+            };
+            movies.push(newMovie);
+            return newMovie;
+        },
+        deleteMovie(_, { id }, __, ___) {
+            movies.splice(parseInt(id) - 1, 1);
+            return "Borrado";
+        }
     }
 };
 export { resolvers };
