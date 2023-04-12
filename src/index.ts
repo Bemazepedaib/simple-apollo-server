@@ -2,38 +2,11 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from '@apollo/server/standalone';
 
-// Defining a simple GraphQL schema
-// Schemas define the way a query is executed against data
-const typeDefs = `
-    type Book {
-        title: String
-        author: String
-    }
+// resolvers
+import { resolvers } from './resolvers.js';
 
-    type Query {
-        books: [Book]
-    }
-`
-
-// Defining simple example data
-const books = [
-    {
-        title: 'The Awakening',
-        author: 'Kate Chopin'
-    },
-    {
-        title: 'City of Glass',
-        author: 'Paul Auster'
-    }
-]
-
-// Defining a simple GraphQL resolvers
-// Resolvers define how to fetch the types defined in the schema
-const resolvers = {
-    Query: {
-        books: () => books
-    }
-}
+// type definitions
+import { typeDefs } from './typeDefs.js';
 
 // Defining a standaloneServer from apollo
 const server = new ApolloServer({
